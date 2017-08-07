@@ -1,0 +1,8 @@
+#!/bin/bash
+drush en devel -y
+drush en devel_generate -y
+drush en link_css -y
+drush updatedb -y
+drush fra -y
+drush vset file_private_path ''
+drush cc all

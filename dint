@@ -1,0 +1,4 @@
+#!/bin/bash
+read -p "請輸入資料庫名稱:" dbname
+mysqladmin create @${dbname} -p
+drush si --db-url=mysql://root:root@localhost/${dbname}

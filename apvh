@@ -1,0 +1,19 @@
+#!/bin/bash
+
+read -p "input domain name: " domain
+read -p "輸入網站資料夾名: " name
+
+touch /etc/apache2/sites-available/"${domain}.conf"
+echo "<VirtualHost *:80>"             >>/etc/apache2/sites-available/"${domain}.conf"
+echo "ServerName  ${domain}"          >>/etc/apache2/sites-available/"${domain}.conf"
+echo "ServerAlias ${domain}"          >>/etc/apache2/sites-available/"${domain}.conf"
+echo "DocumentRoot /var/www/${name}/" >>/etc/apache2/sites-available/"${domain}.conf"
+echo "</VirtualHost>"                 >>/etc/apache2/sites-available/"${domain}.conf"
+
+
+a2ensite "${domain}.conf"
+
+service apache2 restart
+
+
+echo "127.0.0.1   ${domain}" >> /etc/hosts

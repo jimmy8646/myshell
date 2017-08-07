@@ -1,0 +1,8 @@
+#!/bin/bash
+#chown -R cobenash:staff *
+read -p "請輸入.dev檔名:" devname
+drush sql-dump --result-file=sites/default/files/database.sql
+drush sql-drop -y
+
+drush sql-sync @${devname}.dev default -y
+sudo drush rsync @${devname}.dev:%files default:sites/default/ -y
